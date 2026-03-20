@@ -1,0 +1,15 @@
+
+#These prevent unnecessary files from being copied into the Docker image.
+
+**`api/.dockerignore`:**
+```
+node_modules
+.env
+*.test.js
+```
+
+**`webapp/.dockerignore`:**
+```
+node_modules
+build
+.env
