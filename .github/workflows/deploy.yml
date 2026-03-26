@@ -24,13 +24,21 @@ jobs:
 
       - name: Build and push API image
         run: |
-          docker build -t ${{ secrets.ECR_REGISTRY }}/ecommerce-api:${{ github.sha }} ./api
+          docker build \
+            -t ${{ secrets.ECR_REGISTRY }}/ecommerce-api:${{ github.sha }} \
+            -t ${{ secrets.ECR_REGISTRY }}/ecommerce-api:latest \
+            ./api
           docker push ${{ secrets.ECR_REGISTRY }}/ecommerce-api:${{ github.sha }}
+          docker push ${{ secrets.ECR_REGISTRY }}/ecommerce-api:latest
 
       - name: Build and push frontend image
         run: |
-          docker build -t ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:${{ github.sha }} ./webapp
+          docker build \
+            -t ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:${{ github.sha }} \
+            -t ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:latest \
+            ./webapp
           docker push ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:${{ github.sha }}
+          docker push ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:latest
 
       - name: Deploy API to ECS
         run: |
